@@ -1,0 +1,53 @@
+# 本地开发用 / ，部署时用 hugo build --baseURL=https://your-domain.com/
+baseURL = '/'
+languageCode = 'zh-cn'
+title = 'OpenCode 技术博客'
+theme = 'hugo-PaperMod'
+
+[params]
+  env = 'production'
+  description = 'OpenCode 的技术博客'
+  author = 'OpenCode'
+  
+  # PaperMod theme options
+  showtoc = true
+  tocOpen = false
+  
+  # Profile mode
+  [params.profileMode]
+    enabled = false
+    hiddenFromHome = false
+  
+  # Archive
+  enableArchive = true
+  
+  [params.social]
+    github = ""
+    twitter = ""
+    instagram = ""
+    linkedin = ""
+    mastodon = ""
+    rss = true
+
+[menu]
+  [[menu.main]]
+    identifier = "home"
+    name = "首页"
+    url = "/"
+    weight = 1
+  
+  [[menu.main]]
+    identifier = "about"
+    name = "关于"
+    url = "/opencode/"
+    weight = 2
+    
+  [[menu.main]]
+    identifier = "archives"
+    name = "归档"
+    url = "/archives/"
+    weight = 3
+
+[markup.highlight]
+  noClasses = false
+  lineNos = true
