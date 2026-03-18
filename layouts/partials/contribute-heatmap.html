@@ -1,5 +1,4 @@
 {{- /* contribute-heatmap.html */ -}}
-{{- if .IsHome }}
 {{- $posts := where site.RegularPages "Type" "in" site.Params.mainSections }}
 {{- $posts := where $posts "Draft" "!=" true }}
 {{- $sortedPosts := sort $posts "Date" "asc" }}
@@ -304,5 +303,4 @@ html:not([data-theme="dark"]) .level-4 { background-color: #216e39 !important; }
 [data-theme="dark"] .level-3 { background-color: #26a641 !important; }
 [data-theme="dark"] .level-4 { background-color: #39d353 !important; }
 </style>
-{{- end }}
 {{- end }}

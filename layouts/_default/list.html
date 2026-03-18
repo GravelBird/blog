@@ -47,13 +47,13 @@
 
 {{- $paginator := .Paginate $pages }}
 
-{{- /* Heatmap - only on home page first page */}}
-{{- if and .IsHome (eq $paginator.PageNumber 1) }}
-{{- partial "contribute-heatmap.html" . }}
-{{- end }}
-
 {{- if and .IsHome site.Params.homeInfoParams (eq $paginator.PageNumber 1) }}
 {{- partial "home_info.html" . }}
+{{- end }}
+
+{{- /* Heatmap - only on home page first page, after welcome but before posts */}}
+{{- if and .IsHome (eq $paginator.PageNumber 1) }}
+{{- partial "contribute-heatmap.html" . }}
 {{- end }}
 
 {{- $term := .Data.Term }}
