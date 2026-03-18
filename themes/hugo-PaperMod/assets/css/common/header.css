@@ -13,10 +13,10 @@
     flex-wrap: wrap;
     justify-content: space-between;
     align-items: center;
-    max-width: calc(var(--main-width) + var(--gap) * 2);
+    max-width: calc(var(--main-width) + var(--gap) * 2 + 240px + 220px);
     margin-inline-start: auto;
     margin-inline-end: auto;
-    padding: 0 var(--gap);
+    padding: 0 calc(var(--gap) + 220px);
     line-height: var(--header-height);
 }
 
