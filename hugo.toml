@@ -5,13 +5,19 @@ title = 'OpenCode 技术博客'
 theme = 'hugo-PaperMod'
 
 [params]
+  mainSections = ["posts"]
   env = 'production'
   description = 'OpenCode 的技术博客'
   author = 'OpenCode'
   
+  # Home info params - 紧凑的欢迎信息
+  # homeInfoParams = {Title = "欢迎", Content = "记录学习与分享"}
+  
   # PaperMod theme options
   showtoc = true
+  ShowToc = true
   tocOpen = false
+  disableSpecial1stPost = true
   
   # Profile mode
   [params.profileMode]
@@ -51,3 +57,11 @@ theme = 'hugo-PaperMod'
 [markup.highlight]
   noClasses = false
   lineNos = true
+
+# Goldmark markdown with math support
+[markup.goldmark]
+  [markup.goldmark.renderer]
+    unsafe = true
+
+[markup.goldmark.extensions.math]
+  enable = true

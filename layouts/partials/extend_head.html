@@ -1,0 +1,50 @@
+{{- /* extend_head.html */ -}}
+
+<!-- KaTeX for LaTeX math support -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css">
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    // Render display math (katex-display class)
+    document.querySelectorAll('.katex-display').forEach(function(el) {
+        if (el.textContent.trim()) {
+            try {
+                katex.render(el.textContent, el, {
+                    displayMode: true,
+                    throwOnError: false
+                });
+            } catch (e) {
+                console.error('KaTeX render error:', e);
+            }
+        }
+    });
+    
+    // Render inline math (katex-inline class)
+    document.querySelectorAll('.katex-inline').forEach(function(el) {
+        if (el.textContent.trim()) {
+            try {
+                katex.render(el.textContent, el, {
+                    displayMode: false,
+                    throwOnError: false
+                });
+            } catch (e) {
+                console.error('KaTeX render error:', e);
+            }
+        }
+    });
+    
+    // Also handle delimiter-based math for future use
+    if (typeof renderMathInElement !== 'undefined') {
+        renderMathInElement(document.body, {
+            delimiters: [
+                {left: "$$", right: "$$", display: true},
+                {left: "$", right: "$", display: false},
+                {left: "\\[", right: "\\]", display: true},
+                {left: "\\(", right: "\\)", display: false}
+            ],
+            throwOnError: false
+        });
+    }
+});
+</script>

@@ -1,0 +1,157 @@
+{{- $toc := .TableOfContents -}}
+{{- if $toc -}}
+<nav id="toc-sidebar" class="toc-sidebar">
+    <div class="toc-title">
+        <span>目录</span>
+        <button class="toc-toggle-all" onclick="toggleAllTocSections()" title="展开/折叠全部">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M4 6h16M4 12h16M4 18h16"/>
+            </svg>
+        </button>
+    </div>
+    <div class="toc-content" id="toc-content">
+        {{- $toc | safeHTML -}}
+    </div>
+</nav>
+
+<script>
+// TOC Collapsible functionality
+document.addEventListener('DOMContentLoaded', function() {
+    const tocContent = document.getElementById('toc-content');
+    if (!tocContent) return;
+    
+    // Process all ul elements in TOC
+    const topLevelUl = tocContent.querySelector('ul');
+    if (!topLevelUl) return;
+    
+    // Process each li that contains a nested ul
+    function processListItems(ulElement) {
+        const lis = ulElement.querySelectorAll(':scope > li');
+        lis.forEach(function(li) {
+            const nestedUl = li.querySelector(':scope > ul');
+            const link = li.querySelector(':scope > a');
+            
+            if (nestedUl && link) {
+                // This is a parent item with children
+                // Create a wrapper for the link and toggle button
+                const header = document.createElement('div');
+                header.className = 'toc-section-header';
+                
+                // Move the link to the header
+                const linkClone = link.cloneNode(true);
+                header.appendChild(linkClone);
+                
+                // Create toggle button
+                const toggleBtn = document.createElement('button');
+                toggleBtn.className = 'toc-section-toggle';
+                toggleBtn.innerHTML = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 9l6 6 6-6"/></svg>';
+                toggleBtn.title = '展开/折叠';
+                header.appendChild(toggleBtn);
+                
+                // Replace link with header
+                link.parentNode.insertBefore(header, link);
+                link.remove();
+                
+                // Wrap nested ul in a container
+                const contentWrapper = document.createElement('div');
+                contentWrapper.className = 'toc-section-content';
+                nestedUl.parentNode.insertBefore(contentWrapper, nestedUl);
+                contentWrapper.appendChild(nestedUl);
+                
+                // Add click handler to toggle button
+                toggleBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    e.stopPropagation();
+                    const isCollapsed = contentWrapper.classList.contains('collapsed');
+                    if (isCollapsed) {
+                        contentWrapper.classList.remove('collapsed');
+                        toggleBtn.classList.remove('collapsed');
+                    } else {
+                        contentWrapper.classList.add('collapsed');
+                        toggleBtn.classList.add('collapsed');
+                    }
+                });
+                
+                // Also toggle when clicking header
+                header.addEventListener('click', function(e) {
+                    if (e.target === header || e.target === linkClone) {
+                        const isCollapsed = contentWrapper.classList.contains('collapsed');
+                        if (isCollapsed) {
+                            contentWrapper.classList.remove('collapsed');
+                            toggleBtn.classList.remove('collapsed');
+                        }
+                    }
+                });
+                
+                // Process nested items recursively
+                processListItems(nestedUl);
+            }
+        });
+    }
+    
+    processListItems(topLevelUl);
+    
+    // Highlight current section on scroll
+    function highlightCurrentSection() {
+        const headings = document.querySelectorAll('.post-content h1, .post-content h2, .post-content h3, .post-content h4, .post-content h5, .post-content h6');
+        const tocLinks = tocContent.querySelectorAll('a');
+        
+        let currentHeading = null;
+        const scrollPos = window.scrollY + 150;
+        
+        headings.forEach(function(heading) {
+            if (heading.offsetTop <= scrollPos) {
+                currentHeading = heading;
+            }
+        });
+        
+        tocLinks.forEach(function(link) {
+            link.classList.remove('active');
+            if (currentHeading) {
+                const href = link.getAttribute('href');
+                if (href && href === '#' + currentHeading.id) {
+                    link.classList.add('active');
+                    // Expand parent sections
+                    let parent = link.closest('.toc-section-content');
+                    while (parent) {
+                        parent.classList.remove('collapsed');
+                        const header = parent.previousElementSibling;
+                        if (header && header.classList.contains('toc-section-header')) {
+                            const toggle = header.querySelector('.toc-section-toggle');
+                            if (toggle) toggle.classList.remove('collapsed');
+                        }
+                        parent = parent.parentElement.closest('.toc-section-content');
+                    }
+                }
+            }
+        });
+    }
+    
+    window.addEventListener('scroll', highlightCurrentSection);
+    highlightCurrentSection();
+});
+
+// Toggle all sections
+function toggleAllTocSections() {
+    const contents = document.querySelectorAll('.toc-section-content');
+    const toggles = document.querySelectorAll('.toc-section-toggle');
+    const anyExpanded = Array.from(contents).some(c => !c.classList.contains('collapsed'));
+    
+    contents.forEach(function(content) {
+        if (anyExpanded) {
+            content.classList.add('collapsed');
+        } else {
+            content.classList.remove('collapsed');
+        }
+    });
+    
+    toggles.forEach(function(toggle) {
+        if (anyExpanded) {
+            toggle.classList.add('collapsed');
+        } else {
+            toggle.classList.remove('collapsed');
+        }
+    });
+}
+</script>
+{{- end -}}
