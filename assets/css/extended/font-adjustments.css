@@ -65,10 +65,10 @@
 
 /* ===== TOC Sidebar - 固定在右侧，不随滚动 ===== */
 
-/* TOC Sidebar - Fixed position on the right */
+/* TOC Sidebar - Fixed position on the left */
 .toc-sidebar {
   position: fixed;
-  right: max(20px, calc((100vw - var(--main-width) - var(--gap) * 2) / 2 - 180px));
+  left: max(20px, calc((100vw - var(--main-width) - var(--gap) * 2) / 2 - 220px));
   top: 100px;
   width: 200px;
   max-height: calc(100vh - 140px);
@@ -249,7 +249,7 @@
 /* Large screens - adjust TOC position */
 @media (min-width: 1400px) {
   .toc-sidebar {
-    right: max(40px, calc((100vw - var(--main-width) - var(--gap) * 2) / 2 - 220px));
+    left: max(40px, calc((100vw - var(--main-width) - var(--gap) * 2) / 2 - 260px));
     width: 220px;
   }
 }
@@ -270,43 +270,43 @@
 /* ===== Markdown 标题字号 - 比博客名小，但合理大小 ===== */
 /* 博客名是 2.2rem，markdown标题应该更小 */
 .post-content h1 {
+  font-size: 1.5rem !important;
+  font-weight: 600 !important;
+  margin-top: 1.8rem !important;
+  margin-bottom: 0.9rem !important;
+}
+
+.post-content h2 {
   font-size: 1.3rem !important;
   font-weight: 600 !important;
   margin-top: 1.5rem !important;
   margin-bottom: 0.75rem !important;
 }
 
-.post-content h2 {
+.post-content h3 {
   font-size: 1.15rem !important;
   font-weight: 600 !important;
   margin-top: 1.2rem !important;
   margin-bottom: 0.6rem !important;
 }
 
-.post-content h3 {
+.post-content h4 {
   font-size: 1.05rem !important;
-  font-weight: 600 !important;
+  font-weight: 500 !important;
   margin-top: 1rem !important;
   margin-bottom: 0.5rem !important;
 }
 
-.post-content h4 {
+.post-content h5 {
   font-size: 1rem !important;
   font-weight: 500 !important;
   margin-top: 0.8rem !important;
   margin-bottom: 0.4rem !important;
 }
 
-.post-content h5 {
+.post-content h6 {
   font-size: 0.95rem !important;
   font-weight: 500 !important;
   margin-top: 0.6rem !important;
   margin-bottom: 0.3rem !important;
-}
-
-.post-content h6 {
-  font-size: 0.9rem !important;
-  font-weight: 500 !important;
-  margin-top: 0.4rem !important;
-  margin-bottom: 0.2rem !important;
 }
