@@ -254,31 +254,57 @@
   }
 }
 
-/* ===== Markdown 标题 - 调小字号 ===== */
+/* ===== 对齐修复 - 博客名和post标题对齐 ===== */
+
+/* 移除post-header的左右margin，使其与main的padding对齐 */
+.post-header {
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+/* 确保post-title与博客名左对齐 */
+.post-single .post-title {
+  margin-left: 0 !important;
+} - 比博客名小，但合理大小 ===== */
+/* 博客名是 2.2rem，markdown标题应该更小 */
 .post-content h1 {
-  font-size: 0.95rem !important;
+  font-size: 1.6rem !important;
   font-weight: 600 !important;
-  margin-top: 1.2rem !important;
-  margin-bottom: 0.5rem !important;
+  margin-top: 2rem !important;
+  margin-bottom: 1rem !important;
 }
 
 .post-content h2 {
-  font-size: 0.9rem !important;
+  font-size: 1.3rem !important;
   font-weight: 600 !important;
-  margin-top: 1rem !important;
-  margin-bottom: 0.4rem !important;
+  margin-top: 1.5rem !important;
+  margin-bottom: 0.75rem !important;
 }
 
 .post-content h3 {
-  font-size: 0.85rem !important;
-  font-weight: 500 !important;
-  margin-top: 0.8rem !important;
-  margin-bottom: 0.3rem !important;
+  font-size: 1.1rem !important;
+  font-weight: 600 !important;
+  margin-top: 1.2rem !important;
+  margin-bottom: 0.6rem !important;
 }
 
 .post-content h4 {
-  font-size: 0.8rem !important;
+  font-size: 1rem !important;
+  font-weight: 500 !important;
+  margin-top: 1rem !important;
+  margin-bottom: 0.5rem !important;
+}
+
+.post-content h5 {
+  font-size: 0.9rem !important;
+  font-weight: 500 !important;
+  margin-top: 0.8rem !important;
+  margin-bottom: 0.4rem !important;
+}
+
+.post-content h6 {
+  font-size: 0.85rem !important;
   font-weight: 500 !important;
   margin-top: 0.6rem !important;
-  margin-bottom: 0.2rem !important;
+  margin-bottom: 0.3rem !important;
 }
