@@ -8,6 +8,21 @@
   font-weight: 700 !important;
 }
 
+/* ===== 导航栏布局 - 标题靠左，菜单靠右 ===== */
+.nav {
+  justify-content: space-between !important;
+}
+
+.logo {
+  margin-left: 0 !important;
+  margin-right: auto !important;
+}
+
+#menu {
+  margin-left: auto !important;
+  margin-right: 0 !important;
+}
+
 /* ===== 主页 Welcome 区域 - 紧凑布局 ===== */
 .home-info {
   padding: 1rem 1.5rem !important;
