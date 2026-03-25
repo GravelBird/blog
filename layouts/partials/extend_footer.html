@@ -1,0 +1,78 @@
+{{- /* Footer custom content area start */ -}}
+{{- /*     Insert any custom code web-analytics, resources, etc. here */ -}}
+<script>
+// Mobile Menu Toggle Functionality
+(function() {
+    'use strict';
+
+    const menuToggle = document.getElementById('menu-toggle');
+    const menu = document.getElementById('menu');
+
+    if (!menuToggle || !menu) return;
+
+    // Toggle menu function
+    function toggleMenu() {
+        const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
+
+        if (isExpanded) {
+            // Close menu
+            menuToggle.setAttribute('aria-expanded', 'false');
+            menu.classList.remove('menu-visible');
+            menu.classList.add('menu-hidden');
+            document.body.classList.remove('menu-open');
+        } else {
+            // Open menu
+            menuToggle.setAttribute('aria-expanded', 'true');
+            menu.classList.remove('menu-hidden');
+            menu.classList.add('menu-visible');
+            document.body.classList.add('menu-open');
+        }
+    }
+
+    // Close menu function
+    function closeMenu() {
+        menuToggle.setAttribute('aria-expanded', 'false');
+        menu.classList.remove('menu-visible');
+        menu.classList.add('menu-hidden');
+        document.body.classList.remove('menu-open');
+    }
+
+    // Toggle button click handler
+    menuToggle.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        toggleMenu();
+    });
+
+    // Close menu when clicking on backdrop
+    document.addEventListener('click', function(e) {
+        if (document.body.classList.contains('menu-open') &&
+            !menu.contains(e.target) &&
+            !menuToggle.contains(e.target)) {
+            closeMenu();
+        }
+    });
+
+    // Close menu when clicking on a menu item
+    menu.querySelectorAll('a').forEach(function(link) {
+        link.addEventListener('click', function() {
+            closeMenu();
+        });
+    });
+
+    // Close menu with Escape key
+    document.addEventListener('keydown', function(e) {
+        if (e.key === 'Escape' && document.body.classList.contains('menu-open')) {
+            closeMenu();
+        }
+    });
+
+    // Handle window resize - reset menu on desktop
+    window.addEventListener('resize', function() {
+        if (window.innerWidth > 768) {
+            closeMenu();
+        }
+    });
+})();
+</script>
+{{- /* Footer custom content area end */ -}}
