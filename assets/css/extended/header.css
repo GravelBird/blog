@@ -148,8 +148,8 @@ button#theme-toggle svg,
     height: 20px;
 }
 
-html[data-theme="dark"] #sun,
-html[data-theme="light"] #moon {
+html[data-theme="dark"] #moon,
+html[data-theme="light"] #sun {
     display: none;
 }
 
