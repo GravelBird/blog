@@ -17,28 +17,182 @@
         {{- end }}
       ];
       const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+      const weekDays = ['日', '一', '二', '三', '四', '五', '六'];
       const currentYear = new Date().getFullYear();
       const firstYear = {{ $firstYear }};
       let html = '';
+      
       for (let year = currentYear; year >= firstYear; year--) {
         const yearPosts = postData.filter(p => p.date.startsWith(year + '-'));
         if (yearPosts.length === 0) continue;
-        html += '<div class="heatmap-year"><h4>' + year + '</h4>';
-        html += '<div class="heatmap-grid">';
+        
+        // 计算该年的总周数
+        const startDate = new Date(year, 0, 1);
+        const endDate = new Date(year, 11, 31);
+        const startDayOfWeek = startDate.getDay();
+        
+        // 计算第一周的开始日期（可能包含前一年的几天）
+        const firstWeekStart = new Date(startDate);
+        firstWeekStart.setDate(startDate.getDate() - startDayOfWeek);
+        
+        // 计算总周数
+        const totalDays = Math.ceil((endDate - firstWeekStart) / (1000 * 60 * 60 * 24)) + 1;
+        const totalWeeks = Math.ceil(totalDays / 7);
+        
+        // 统计每天的文章数
         const postsByDate = {};
         yearPosts.forEach(p => { postsByDate[p.date] = (postsByDate[p.date] || 0) + 1; });
-        for (let day = 1; day <= 365; day++) {
-          const date = new Date(year, 0, day);
-          const dateStr = date.toISOString().split('T')[0];
-          const count = postsByDate[dateStr] || 0;
-          let level = count >= 4 ? 4 : count;
-          html += '<div class="heatmap-day level-' + level + '" title="' + dateStr + ': ' + count + '"></div>';
+        
+        html += '<div class="heatmap-year"><h4>' + year + '</h4>';
+        html += '<div class="heatmap-content">';
+        
+        // 月份标签行
+        html += '<div class="heatmap-months">';
+        html += '<div class="heatmap-weekday-labels"></div>'; // 左侧星期标签占位
+        let lastMonth = -1;
+        let monthPositions = [];
+        
+        // 计算每个月应该显示的位置
+        for (let month = 0; month < 12; month++) {
+          const monthStart = new Date(year, month, 1);
+          const dayOfYear = Math.floor((monthStart - firstWeekStart) / (1000 * 60 * 60 * 24));
+          const weekIndex = Math.floor(dayOfYear / 7);
+          if (weekIndex >= 0 && weekIndex < totalWeeks) {
+            monthPositions.push({ month, weekIndex });
+          }
         }
-        html += '</div></div>';
+        
+        // 渲染月份标签
+        let currentPos = 0;
+        monthPositions.forEach((pos, idx) => {
+          const nextPos = idx < monthPositions.length - 1 ? monthPositions[idx + 1].weekIndex : totalWeeks;
+          const width = (nextPos - pos.weekIndex) * 13;
+          html += '<div class="heatmap-month" style="width:' + width + 'px">' + months[pos.month] + '</div>';
+        });
+        html += '</div>';
+        
+        // 热力图网格
+        html += '<div class="heatmap-grid-wrapper">';
+        
+        // 左侧星期标签
+        html += '<div class="heatmap-weekday-labels">';
+        weekDays.forEach((day, i) => {
+          if (i % 2 === 1) { // 只显示奇数行标签（一、三、五）
+            html += '<div class="heatmap-weekday-label">' + day + '</div>';
+          } else {
+            html += '<div class="heatmap-weekday-label"></div>';
+          }
+        });
+        html += '</div>';
+        
+        // 日期格子
+        html += '<div class="heatmap-grid">';
+        for (let week = 0; week < totalWeeks; week++) {
+          html += '<div class="heatmap-week">';
+          for (let dayOfWeek = 0; dayOfWeek < 7; dayOfWeek++) {
+            const dayOffset = week * 7 + dayOfWeek - startDayOfWeek;
+            const date = new Date(year, 0, 1 + dayOffset);
+            const dateStr = date.toISOString().split('T')[0];
+            const isCurrentYear = date.getFullYear() === year;
+            
+            // 只显示属于当前年份的日期
+            if (!isCurrentYear) {
+              html += '<div class="heatmap-day empty"></div>';
+            } else {
+              const count = postsByDate[dateStr] || 0;
+              let level = count >= 4 ? 4 : count;
+              html += '<div class="heatmap-day level-' + level + '" title="' + dateStr + ': ' + count + ' 篇文章"></div>';
+            }
+          }
+          html += '</div>';
+        }
+        html += '</div></div></div></div>';
       }
       document.getElementById('heatmap-wrapper').innerHTML = html;
     })();
   </script>
-  <style>.heatmap-container{margin:2rem 0;padding:1rem;background:#fff;border:1px solid #e1e4e8;border-radius:6px}.heatmap-container h3{margin:0 0 1rem;font-size:1.1rem;color:#24292f}.heatmap-year{margin-bottom:1.5rem}.heatmap-year h4{font-size:1rem;margin:0 0 .5rem;color:#24292f}.heatmap-grid{display:flex;flex-wrap:wrap;gap:2px}.heatmap-day{width:10px;height:10px;border-radius:2px;background:#ebedf0}.heatmap-day.level-1{background:#9be9a8}.heatmap-day.level-2{background:#40c463}.heatmap-day.level-3{background:#30a14e}.heatmap-day.level-4{background:#216e39}</style>
+  <style>
+    .heatmap-container {
+      margin: 2rem 0;
+      padding: 1rem;
+      background: var(--entry);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+    }
+    .heatmap-container h3 {
+      margin: 0 0 1rem;
+      font-size: 1.1rem;
+      color: var(--content);
+    }
+    .heatmap-year {
+      margin-bottom: 1.5rem;
+    }
+    .heatmap-year:last-child {
+      margin-bottom: 0;
+    }
+    .heatmap-year h4 {
+      font-size: 1rem;
+      margin: 0 0 .5rem;
+      color: var(--content);
+    }
+    .heatmap-months {
+      display: flex;
+      margin-bottom: 4px;
+      margin-left: 28px;
+    }
+    .heatmap-month {
+      font-size: 10px;
+      color: var(--secondary);
+      text-align: left;
+    }
+    .heatmap-content {
+      display: flex;
+      flex-direction: column;
+    }
+    .heatmap-grid-wrapper {
+      display: flex;
+      align-items: flex-start;
+    }
+    .heatmap-weekday-labels {
+      display: flex;
+      flex-direction: column;
+      margin-right: 4px;
+    }
+    .heatmap-weekday-label {
+      height: 11px;
+      line-height: 11px;
+      font-size: 10px;
+      color: var(--secondary);
+      width: 20px;
+      text-align: right;
+    }
+    .heatmap-grid {
+      display: flex;
+      gap: 3px;
+    }
+    .heatmap-week {
+      display: flex;
+      flex-direction: column;
+      gap: 3px;
+    }
+    .heatmap-day {
+      width: 11px;
+      height: 11px;
+      border-radius: 2px;
+      background: var(--tertiary);
+    }
+    .heatmap-day.empty {
+      background: transparent !important;
+    }
+    .heatmap-day.level-1 { background: #9be9a8; }
+    .heatmap-day.level-2 { background: #40c463; }
+    .heatmap-day.level-3 { background: #30a14e; }
+    .heatmap-day.level-4 { background: #216e39; }
+    html[data-theme="dark"] .heatmap-day:not(.empty) { background: var(--tertiary); }
+    html[data-theme="dark"] .heatmap-day.level-1 { background: #0e4429; }
+    html[data-theme="dark"] .heatmap-day.level-2 { background: #006d32; }
+    html[data-theme="dark"] .heatmap-day.level-3 { background: #26a641; }
+    html[data-theme="dark"] .heatmap-day.level-4 { background: #39d353; }
+  </style>
 </div>
 {{- end }}
