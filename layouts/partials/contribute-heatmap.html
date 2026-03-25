@@ -76,7 +76,9 @@
             // 最后一个月份（12月）只计算到12月31日所在的周
             nextPos = lastWeekIndex + 1;
           }
-          const width = (nextPos - pos.weekIndex) * 13;
+          // 使用CSS变量或动态计算，支持响应式
+          const cellWidth = window.innerWidth <= 480 ? 10 : (window.innerWidth <= 768 ? 11 : 13);
+          const width = (nextPos - pos.weekIndex) * cellWidth;
           html += '<div class="heatmap-month" style="width:' + width + 'px">' + months[pos.month] + '</div>';
         });
         html += '</div>';
@@ -203,6 +205,65 @@
     html[data-theme="dark"] .heatmap-day.level-2 { background: #006d32; }
     html[data-theme="dark"] .heatmap-day.level-3 { background: #26a641; }
     html[data-theme="dark"] .heatmap-day.level-4 { background: #39d353; }
+
+    /* 移动端适配 */
+    @media screen and (max-width: 768px) {
+      .heatmap-container {
+        padding: 0.75rem;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+      .heatmap-content {
+        min-width: max-content;
+      }
+      .heatmap-day {
+        width: 9px;
+        height: 9px;
+      }
+      .heatmap-weekday-label {
+        height: 9px;
+        line-height: 9px;
+        font-size: 8px;
+        width: 16px;
+      }
+      .heatmap-month {
+        font-size: 9px;
+      }
+      .heatmap-grid {
+        gap: 2px;
+      }
+      .heatmap-week {
+        gap: 2px;
+      }
+      .heatmap-year h4 {
+        font-size: 0.9rem;
+      }
+      .heatmap-container h3 {
+        font-size: 1rem;
+      }
+    }
+
+    @media screen and (max-width: 480px) {
+      .heatmap-container {
+        padding: 0.5rem;
+      }
+      .heatmap-day {
+        width: 8px;
+        height: 8px;
+      }
+      .heatmap-weekday-label {
+        height: 8px;
+        line-height: 8px;
+        font-size: 7px;
+        width: 14px;
+      }
+      .heatmap-months {
+        margin-left: 22px;
+      }
+      .heatmap-year h4 {
+        font-size: 0.85rem;
+      }
+    }
   </style>
 </div>
 {{- end }}
