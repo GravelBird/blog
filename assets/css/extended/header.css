@@ -1,0 +1,210 @@
+/* ===== PhotoGallery Header Styles ===== */
+
+/* Body background - PhotoGallery style */
+body {
+    background: var(--theme) !important;
+}
+
+/* Header - Sticky with glass effect */
+.header {
+    position: sticky !important;
+    top: 0;
+    z-index: 100;
+    background: var(--entry) !important;
+    border-bottom: 1px solid var(--border) !important;
+    backdrop-filter: blur(10px) !important;
+    -webkit-backdrop-filter: blur(10px) !important;
+}
+
+/* Override fixed positioning from theme */
+.header {
+    position: -webkit-sticky !important;
+    position: sticky !important;
+    left: auto !important;
+    right: auto !important;
+}
+
+/* Navigation container */
+.nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: calc(var(--nav-width) + var(--gap) * 2);
+    margin: 0 auto;
+    padding: 0 var(--gap);
+    height: var(--header-height);
+    line-height: normal !important;
+}
+
+/* Logo styles - PhotoGallery style */
+.logo {
+    flex: 1;
+    margin: 0 !important;
+    display: flex;
+    flex-wrap: inherit;
+}
+
+.logo a {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 24px !important;
+    font-weight: 700 !important;
+    letter-spacing: -0.5px;
+}
+
+.logo a img,
+.logo a svg {
+    display: inline;
+    vertical-align: middle;
+    pointer-events: none;
+    transform: translate(0, -10%);
+    border-radius: 50% !important;
+    height: 32px;
+    width: auto;
+    margin-inline-end: 8px;
+}
+
+/* Site title with gradient effect */
+.logo a {
+    background: linear-gradient(45deg, var(--primary), var(--accent)) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+}
+
+/* Navigation right section */
+.nav-right {
+    display: flex;
+    align-items: center;
+    gap: calc(var(--gap) / 2);
+}
+
+/* Menu styles - PhotoGallery style */
+#menu {
+    display: flex;
+    align-items: center;
+    gap: var(--gap);
+    list-style: none;
+    word-break: keep-all;
+    overflow-x: auto;
+    white-space: nowrap;
+    margin: 0 !important;
+}
+
+#menu li {
+    margin: 0 !important;
+}
+
+#menu li + li {
+    margin-inline-start: 0 !important;
+}
+
+#menu a {
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    padding: 8px 12px !important;
+    border-radius: var(--radius);
+    transition: all 0.2s ease;
+}
+
+#menu a:hover {
+    background: var(--hover) !important;
+    color: var(--accent) !important;
+}
+
+#menu .active {
+    font-weight: 600 !important;
+    border-bottom: none !important;
+    color: var(--accent) !important;
+}
+
+/* Theme toggle button - PhotoGallery style */
+button#theme-toggle,
+#theme-toggle {
+    width: 40px !important;
+    height: 40px !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50% !important;
+    color: var(--primary) !important;
+    transition: all 0.2s ease;
+    font-size: 20px !important;
+    margin: auto 4px;
+    background: transparent !important;
+    border: none;
+    cursor: pointer;
+}
+
+button#theme-toggle:hover,
+#theme-toggle:hover {
+    background: var(--hover) !important;
+}
+
+button#theme-toggle svg,
+#theme-toggle svg {
+    width: 20px;
+    height: 20px;
+}
+
+html[data-theme="dark"] #sun,
+html[data-theme="light"] #moon {
+    display: none;
+}
+
+/* Language switch */
+.lang-switch li,
+.lang-switch ul,
+.logo-switches {
+    display: inline-flex;
+    margin: auto 4px;
+}
+
+.lang-switch {
+    display: flex;
+    flex-wrap: inherit;
+}
+
+.lang-switch a {
+    margin: auto 3px;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    padding: 8px 12px !important;
+    border-radius: var(--radius);
+    transition: all 0.2s ease;
+}
+
+.lang-switch a:hover {
+    background: var(--hover) !important;
+    color: var(--accent) !important;
+}
+
+.logo-switches {
+    flex-wrap: inherit;
+}
+
+/* Main content area adjustment for sticky header */
+.main {
+    padding-top: calc(var(--header-height) + var(--gap)) !important;
+}
+
+/* Responsive header - PhotoGallery style */
+@media (max-width: 768px) {
+    .nav {
+        padding: 0 calc(var(--gap) / 2);
+    }
+
+    .logo a {
+        font-size: 20px !important;
+    }
+
+    #menu {
+        gap: calc(var(--gap) / 2);
+    }
+
+    #menu a {
+        padding: 6px 10px !important;
+        font-size: 13px !important;
+    }
+}

@@ -1,0 +1,63 @@
+/* ===== PhotoGallery Theme Color Variables - Instagram inspired ===== */
+/* Use html selector to override :root in theme */
+
+html {
+    /* Layout adjustments to match PhotoGallery */
+    --gap: 16px !important;
+    --nav-width: 800px !important;
+    --main-width: 800px !important;
+
+    /* Light theme colors - Instagram inspired */
+    --theme: rgb(250, 250, 250) !important;
+    --entry: rgb(255, 255, 255) !important;
+    --primary: rgb(38, 38, 38) !important;
+    --secondary: rgb(142, 142, 142) !important;
+    --tertiary: rgb(219, 219, 219) !important;
+    --content: rgb(38, 38, 38) !important;
+    --border: rgb(219, 219, 219) !important;
+
+    /* Instagram-like accent colors */
+    --accent: rgb(0, 149, 246) !important;
+    --accent-hover: rgb(0, 116, 204) !important;
+    --like: rgb(237, 73, 86) !important;
+
+    /* Shadow and hover effects */
+    --shadow: rgba(0, 0, 0, 0.05) !important;
+    --hover: rgba(0, 0, 0, 0.03) !important;
+
+    /* Code block colors */
+    --code-block-bg: rgb(28, 29, 33) !important;
+    --code-bg: rgb(245, 245, 245) !important;
+
+    color-scheme: light;
+}
+
+/* Dark theme - Instagram dark mode */
+html[data-theme="dark"] {
+    --theme: rgb(0, 0, 0) !important;
+    --entry: rgb(18, 18, 18) !important;
+    --primary: rgb(250, 250, 250) !important;
+    --secondary: rgb(168, 168, 168) !important;
+    --tertiary: rgb(54, 54, 54) !important;
+    --content: rgb(250, 250, 250) !important;
+    --border: rgb(54, 54, 54) !important;
+
+    --accent: rgb(0, 149, 246) !important;
+    --accent-hover: rgb(56, 170, 255) !important;
+    --like: rgb(237, 73, 86) !important;
+
+    --shadow: rgba(255, 255, 255, 0.05) !important;
+    --hover: rgba(255, 255, 255, 0.03) !important;
+
+    --code-block-bg: rgb(18, 18, 18) !important;
+    --code-bg: rgb(30, 30, 30) !important;
+
+    color-scheme: dark;
+}
+
+/* Smooth transitions for theme changes */
+html *,
+html *::before,
+html *::after {
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease;
+}
