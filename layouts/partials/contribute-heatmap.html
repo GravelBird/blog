@@ -62,10 +62,20 @@
           }
         }
         
+        // 计算12月31日所在的周索引（用于正确计算12月的宽度）
+        const lastDayOfYear = new Date(year, 11, 31);
+        const lastDayOffset = Math.floor((lastDayOfYear - firstWeekStart) / (1000 * 60 * 60 * 24));
+        const lastWeekIndex = Math.floor(lastDayOffset / 7);
+        
         // 渲染月份标签
-        let currentPos = 0;
         monthPositions.forEach((pos, idx) => {
-          const nextPos = idx < monthPositions.length - 1 ? monthPositions[idx + 1].weekIndex : totalWeeks;
+          let nextPos;
+          if (idx < monthPositions.length - 1) {
+            nextPos = monthPositions[idx + 1].weekIndex;
+          } else {
+            // 最后一个月份（12月）只计算到12月31日所在的周
+            nextPos = lastWeekIndex + 1;
+          }
           const width = (nextPos - pos.weekIndex) * 13;
           html += '<div class="heatmap-month" style="width:' + width + 'px">' + months[pos.month] + '</div>';
         });
