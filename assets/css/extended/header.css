@@ -53,6 +53,7 @@ body {
     font-size: 24px !important;
     font-weight: 700 !important;
     letter-spacing: -0.5px;
+    line-height: 1 !important;
 }
 
 .logo a img {
@@ -61,12 +62,12 @@ body {
     border-radius: 50% !important;
 }
 
-/* Site title with gradient effect */
-.logo a {
-    background: linear-gradient(45deg, var(--primary), var(--accent)) !important;
-    -webkit-background-clip: text !important;
-    -webkit-text-fill-color: transparent !important;
-    background-clip: text !important;
+/* Site title - gradient effect */
+.site-title {
+    background: linear-gradient(45deg, var(--primary), var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 /* Navigation right section */
@@ -176,9 +177,10 @@ html[data-theme="light"] #sun {
     flex-wrap: inherit;
 }
 
-/* Main content area adjustment for sticky header */
+/* Main content area - match header width */
 .main {
-    padding-top: calc(var(--header-height) + 8px) !important;
+    max-width: var(--nav-width) !important;
+    padding-top: calc(var(--header-height) + var(--gap)) !important;
 }
 
 /* Mobile Menu Toggle Button - Stack style */
