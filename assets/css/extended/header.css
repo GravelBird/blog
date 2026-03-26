@@ -29,19 +29,18 @@ body {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    max-width: calc(var(--nav-width) + var(--gap) * 2);
+    max-width: var(--nav-width);
     margin: 0 auto;
     padding: 0 var(--gap);
     height: var(--header-height);
-    line-height: normal !important;
 }
 
 /* Logo styles - PhotoGallery style */
 .logo {
     flex: 1;
-    margin: 0 !important;
     display: flex;
-    flex-wrap: inherit;
+    align-items: center;
+    gap: 8px;
 }
 
 .logo a {
@@ -53,16 +52,10 @@ body {
     letter-spacing: -0.5px;
 }
 
-.logo a img,
-.logo a svg {
-    display: inline;
-    vertical-align: middle;
-    pointer-events: none;
-    transform: translate(0, -10%);
-    border-radius: 50% !important;
+.logo a img {
     height: 32px;
     width: auto;
-    margin-inline-end: 8px;
+    border-radius: 50% !important;
 }
 
 /* Site title with gradient effect */
@@ -120,32 +113,28 @@ body {
 }
 
 /* Theme toggle button - PhotoGallery style */
-button#theme-toggle,
 #theme-toggle {
-    width: 40px !important;
-    height: 40px !important;
+    width: 36px !important;
+    height: 36px !important;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 50% !important;
     color: var(--primary) !important;
     transition: all 0.2s ease;
-    font-size: 20px !important;
-    margin: auto 4px;
     background: transparent !important;
     border: none;
     cursor: pointer;
+    margin-left: 4px;
 }
 
-button#theme-toggle:hover,
 #theme-toggle:hover {
     background: var(--hover) !important;
 }
 
-button#theme-toggle svg,
 #theme-toggle svg {
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 18px;
 }
 
 html[data-theme="dark"] #moon,
