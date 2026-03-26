@@ -279,44 +279,64 @@
 
 /* ===== Markdown 标题字号 - 比博客名小，但合理大小 ===== */
 /* 博客名是 2.2rem，markdown标题应该更小 */
+
+/* 正文基础字号 */
+.post-content {
+  font-size: 1.05rem !important;
+  line-height: 1.8 !important;
+}
+
+/* 段落文字 */
+.post-content p {
+  font-size: 1.05rem !important;
+  line-height: 1.8 !important;
+  margin-bottom: 1rem !important;
+}
+
+/* 列表项文字 */
+.post-content li {
+  font-size: 1.05rem !important;
+  line-height: 1.7 !important;
+}
+
 .post-content h1 {
+  font-size: 1.8rem !important;
+  font-weight: 700 !important;
+  margin-top: 2rem !important;
+  margin-bottom: 1rem !important;
+}
+
+.post-content h2 {
   font-size: 1.5rem !important;
   font-weight: 600 !important;
   margin-top: 1.8rem !important;
   margin-bottom: 0.9rem !important;
 }
 
-.post-content h2 {
+.post-content h3 {
   font-size: 1.3rem !important;
   font-weight: 600 !important;
   margin-top: 1.5rem !important;
   margin-bottom: 0.75rem !important;
 }
 
-.post-content h3 {
+.post-content h4 {
   font-size: 1.15rem !important;
   font-weight: 600 !important;
   margin-top: 1.2rem !important;
   margin-bottom: 0.6rem !important;
 }
 
-.post-content h4 {
-  font-size: 1.05rem !important;
+.post-content h5 {
+  font-size: 1.1rem !important;
   font-weight: 500 !important;
   margin-top: 1rem !important;
   margin-bottom: 0.5rem !important;
 }
 
-.post-content h5 {
-  font-size: 1rem !important;
+.post-content h6 {
+  font-size: 1.05rem !important;
   font-weight: 500 !important;
   margin-top: 0.8rem !important;
   margin-bottom: 0.4rem !important;
-}
-
-.post-content h6 {
-  font-size: 0.95rem !important;
-  font-weight: 500 !important;
-  margin-top: 0.6rem !important;
-  margin-bottom: 0.3rem !important;
 }
