@@ -82,7 +82,7 @@
             nextPos = lastWeekIndex + 1;
           }
           // 使用CSS变量或动态计算，支持响应式
-          const cellWidth = window.innerWidth <= 480 ? 10 : (window.innerWidth <= 768 ? 11 : 12);
+          const cellWidth = window.innerWidth <= 480 ? 8 : (window.innerWidth <= 768 ? 9 : 10);
           const width = (nextPos - pos.weekIndex) * cellWidth;
           html += '<div class="heatmap-month" style="width:' + width + 'px">' + months[pos.month] + '</div>';
         });
@@ -147,7 +147,6 @@
       border: 1px solid var(--border);
       border-radius: 6px;
       max-width: 100%;
-      overflow-x: auto;
     }
     .heatmap-container h3 {
       margin: 0 0 1rem;
@@ -189,8 +188,8 @@
       margin-right: 4px;
     }
     .heatmap-weekday-label {
-      height: 11px;
-      line-height: 11px;
+      height: 10px;
+      line-height: 10px;
       font-size: 10px;
       color: var(--secondary);
       width: 20px;
@@ -198,16 +197,16 @@
     }
     .heatmap-grid {
       display: flex;
-      gap: 3px;
+      gap: 2px;
     }
     .heatmap-week {
       display: flex;
       flex-direction: column;
-      gap: 3px;
+      gap: 2px;
     }
     .heatmap-day {
-      width: 12px;
-      height: 12px;
+      width: 10px;
+      height: 10px;
       border-radius: 2px;
       background: var(--tertiary);
       cursor: default;
@@ -236,19 +235,19 @@
     @media screen and (max-width: 768px) {
       .heatmap-container {
         padding: 0.75rem;
-        overflow-x: auto;
+        overflow-x: hidden;
         -webkit-overflow-scrolling: touch;
       }
       .heatmap-content {
-        min-width: max-content;
+        min-width: auto;
       }
       .heatmap-day {
-        width: 10px;
-        height: 10px;
+        width: 9px;
+        height: 9px;
       }
       .heatmap-weekday-label {
-        height: 10px;
-        line-height: 10px;
+        height: 9px;
+        line-height: 9px;
         font-size: 8px;
         width: 16px;
       }
@@ -274,12 +273,12 @@
         padding: 0.5rem;
       }
       .heatmap-day {
-        width: 9px;
-        height: 9px;
+        width: 8px;
+        height: 8px;
       }
       .heatmap-weekday-label {
-        height: 9px;
-        line-height: 9px;
+        height: 8px;
+        line-height: 8px;
         font-size: 7px;
         width: 14px;
       }
