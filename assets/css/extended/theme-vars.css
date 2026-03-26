@@ -6,6 +6,7 @@ html {
     --gap: 16px !important;
     --nav-width: 800px !important;
     --main-width: 800px !important;
+    --header-height: 60px !important;
 
     /* Light theme colors - Instagram inspired */
     --theme: rgb(250, 250, 250) !important;

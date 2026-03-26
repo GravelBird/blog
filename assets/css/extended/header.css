@@ -1,8 +1,11 @@
 /* ===== PhotoGallery Header Styles ===== */
 
-/* Body background - PhotoGallery style */
+/* Body base styles - PhotoGallery style */
 body {
     background: var(--theme) !important;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
+    font-size: 14px !important;
+    line-height: 1.5 !important;
 }
 
 /* Header - Sticky with glass effect */
