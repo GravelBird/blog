@@ -37,21 +37,19 @@
         
         <div class="nav-right">
             <ul id="menu" class="menu-hidden">
-                {{- range site.Menus.main }}
                 <li>
-                    <a href="{{ .URL | absLangURL }}" title="{{ .Title | default .Name }}">
-                        <span>{{ .Name }}</span>
-                    </a>
-                </li>
-                {{- end }}
-                <li>
-                    <a href="{{ "photos/" | absLangURL }}" title="照片墙">
-                        <span>照片墙</span>
+                    <a href="{{ "" | absLangURL }}" title="首页">
+                        <span>首页</span>
                     </a>
                 </li>
                 <li>
-                    <a href="{{ "tags/" | absLangURL }}" title="标签">
-                        <span>标签</span>
+                    <a href="{{ "archives/" | absLangURL }}" title="归档">
+                        <span>归档</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="{{ "about/" | absLangURL }}" title="关于">
+                        <span>关于</span>
                     </a>
                 </li>
             </ul>
