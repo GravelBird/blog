@@ -146,37 +146,6 @@ html[data-theme="light"] #sun {
     display: none;
 }
 
-/* Language switch */
-.lang-switch li,
-.lang-switch ul,
-.logo-switches {
-    display: inline-flex;
-    margin: auto 4px;
-}
-
-.lang-switch {
-    display: flex;
-    flex-wrap: inherit;
-}
-
-.lang-switch a {
-    margin: auto 3px;
-    font-size: 14px !important;
-    font-weight: 600 !important;
-    padding: 8px 12px !important;
-    border-radius: var(--radius);
-    transition: all 0.2s ease;
-}
-
-.lang-switch a:hover {
-    background: var(--hover) !important;
-    color: var(--accent) !important;
-}
-
-.logo-switches {
-    flex-wrap: inherit;
-}
-
 /* Main content area - match header width */
 .main {
     max-width: var(--nav-width) !important;

@@ -4,8 +4,8 @@
 html {
     /* Layout adjustments to match PhotoGallery */
     --gap: 16px !important;
-    --nav-width: 800px !important;
-    --main-width: 800px !important;
+    --nav-width: 960px !important;
+    --main-width: 960px !important;
     --header-height: 60px !important;
 
     /* Light theme colors - Instagram inspired */
